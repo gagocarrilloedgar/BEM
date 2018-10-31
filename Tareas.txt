@@ -1,0 +1,9 @@
+-Crear funciones F1 y F2
+-Crear Método de la bisectriz
+-Implementar F2 a través de bisecrtiz --> v_i a través de BEM
+-Implementar F1 a través de bisecrtiz --> omega a través de BEM
+
+------------------ Hasta aqí la priemra parte
+
+----Después está el siguiente apartado pero primero mejor dejar este hecho
+	
