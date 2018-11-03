@@ -18,14 +18,14 @@ while(epsilon_1>epsilon && epsilon_2> epsilon)
     switch(option)
         case 1
             %Computing the needed points
-            [F1_a] =  WdFz(omega_a,R_propeller,rho,Chord_real,Cl,Cd,N,Weight,N_blades,phi,lambdai_BEM);
-            [F1_b] =  WdFz(omega_b,R_propeller,rho,Chord_real,Cl,Cd,N,Weight,N_blades,phi,lambdai_BEM);
-            [F1_c] =  WdFz(omega_c,R_propeller,rho,Chord_real,Cl,Cd,N,Weight,N_blades,phi,lambdai_BEM);
+            [F1_a] =  WdFz(omega_a,R_propeller,rho,Chord_real,Cl,Cd,N,Weight,N_blades,phi,lambdai_BEM_PR);
+            [F1_b] =  WdFz(omega_b,R_propeller,rho,Chord_real,Cl,Cd,N,Weight,N_blades,phi,lambdai_BEM_PR);
+            [F1_c] =  WdFz(omega_c,R_propeller,rho,Chord_real,Cl,Cd,N,Weight,N_blades,phi,lambdai_BEM_PR);
         case 2
             %Computing the needed points
-            [F1_a] =  WdFzNumeric(omega_a,R_propeller,rho,Chord_real,Cl,Cd,N,Weight,r,N_blades,phi,lambdai_BEM);
-            [F1_b] =  WdFzNumeric(omega_b,R_propeller,rho,Chord_real,Cl,Cd,N,Weight,r,N_blades,phi,lambdai_BEM);
-            [F1_c] =  WdFzNumeric(omega_c,R_propeller,rho,Chord_real,Cl,Cd,N,Weight,r,N_blades,phi,lambdai_BEM);
+            [F1_a] =  WdFzNumeric(omega_a,R_propeller,rho,Chord_real,Cl,Cd,N,Weight,r,N_blades,phi,lambdai_BEM_PR);
+            [F1_b] =  WdFzNumeric(omega_b,R_propeller,rho,Chord_real,Cl,Cd,N,Weight,r,N_blades,phi,lambdai_BEM_PR);
+            [F1_c] =  WdFzNumeric(omega_c,R_propeller,rho,Chord_real,Cl,Cd,N,Weight,r,N_blades,phi,lambdai_BEM_PR);
         otherwise
             fprintf('Not an option');
             break;
@@ -45,6 +45,7 @@ while(epsilon_1>epsilon && epsilon_2> epsilon)
     if(F1_a * F1_b > 0)
         omega_b = 1.5*omega_b;
     end
-      
+    
+    [lambdai_BEM_PR,phi] = InducedVelocityPrandtlLosses2(Sigma_real,Theta_real,r,N,N_blades,Cl_pchip2,Cd_pchip2,v_sound,omega_ideal,R_propeller);
     
 end

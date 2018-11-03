@@ -11,3 +11,5 @@ Cd_spline = pchip(Alpha,Cd,Alpha_unf);
 
 Efficiency_spline = Cl_spline./Cd_spline;
 Efficiency_pchip = Cl_pchip./Cd_pchip;
+
+

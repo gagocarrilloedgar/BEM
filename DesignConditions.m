@@ -18,6 +18,7 @@ T_h= T_0 + a*h; %k
 g=9.81;
 gamma = 1.4;
 R = 287;
+v_sound = sqrt(R*gamma*T_h);
 v_proppeller = M_tip*sqrt(R*gamma*T_h);%m/s
 omega_ideal = v_proppeller/R_propeller; %(rad/s)
 rho_0 = 1.225;

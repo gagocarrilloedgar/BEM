@@ -4,12 +4,29 @@ format compact;
 
 %Computing the induced velocities
 
-% Now prandtl root-tip vortex losses 
-[lambdai_BEM_PR] = InducedVelocityPrandtlLosses(Sigma_real,Cl_alpha,Theta_real,r,N,N_blades,M_tip);
+InducedPrGl;
 
-% Changin de cl for the correct one computed by alpha = theta - atan(lambda_i/r)
-alpha_modified =  rad2deg(Theta_real - atan(lambdai_BEM./r));
+F1=-3;
+i=0;
+option = 2;
+omega = omega_ideal;
+switch(option)
+    case 1
+        while(F1<0)
+            [F1] =   WdFz(omega,R_propeller,rho,Chord_real,Cl,Cd,N,Weight,N_blades,phi,lambdai_BEM_PR);
+            omega = omega*1.5;
+        end
+    case 2 % Numerical integration in order to find the right 
+        while(F1<0)
+            [F1] =  WdFzNumeric(omega,R_propeller,rho,Chord_real,Cl,Cd,N,Weight,r,N_blades,phi,lambdai_BEM_PR);
+            omega = omega - 50;
+        end
+    otherwise
+end
 
-%Interpolation between alpha, cl and alpha_modified
-Cl_modified = interp1(Alpha, Cl,alpha_modified);
-Cd_modified = interp1(Alpha, Cd,alpha_modified);
+%Computing the bolzano theorem in order to find the right omega
+BolzanoTheorem2;
+Omega_BEM(2,1) = (omega_a + omega_c)/2;
+
+err = abs(Omega_BEM(2,1) - Omega_BEM(1,1));
+

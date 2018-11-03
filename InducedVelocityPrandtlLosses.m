@@ -1,4 +1,4 @@
-function [lambda_i] = InducedVelocityPrandtlLosses(sigma,Cl_alpha,theta,r,N,nblades,Mtip)
+function [lambda_i] = InducedVelocityPrandtlLosses(sigma,Cl_alpha,theta,r,N,nblades,omega,R_propeller,a)
 
 
 %Hipotesis taken in order to simplified the bem equation:
@@ -15,7 +15,6 @@ x0 = zeros(N,1);
 lambda_i_k=fsolve(fun,x0);
 
 %Prandtl-Glauert compressibility corrections
-PrGl = Cl_alpha/sqrt(1 - Mtip^2); % m va multiplicado por r(i)
 
 %Deifintion of functions F,f_tip,f_root and phi
 r_root=r(1,1);
@@ -60,14 +59,14 @@ lambda_i=fsolve(fun,x0);
     function F = Solver(x)
         F=zeros(N,1);
         for i = 1:N
-            F(i) = 4*(x(i)^2)*r(i) - 0.5*sigma(i)*r(i)*Cl_alpha*(theta(i) - atan(x(i)/r(i)));
+            F(i) = 4*(x(i)^2)*r(i) - (0.5*sigma(i)*r(i)*Cl_alpha*(theta(i) - atan(x(i)/r(i))))/sqrt(1 - (((omega*x(i)*R_propeller)/a)^2)*(x(i)^2));
         end
     end
 
     function F1 = SolverPrandtl(x)
         F1=zeros(N,1);
         for i = 2:N-1
-            F1(i) = 4*(x(i)^2)*r(i) - 0.5*sigma(i)*r(i)*Cl_alpha*(theta(i) - atan(x(i)/(F_K_1(i)*r(i))));
+            F1(i) = 4*(x(i)^2)*r(i) - (0.5*sigma(i)*r(i)*Cl_alpha*(theta(i) - atan(x(i)/(F_K_1(i)*r(i)))))/sqrt(1 - (((omega*x(i)*R_propeller)/a)^2)*(x(i)^2));
         end
     end
 
