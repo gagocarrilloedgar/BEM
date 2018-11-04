@@ -29,10 +29,9 @@ ChordAndSolidity;
 %% Aplicación de BEM
 % Bem for v_c = 0;
 SimplfiedBEMForW; % Not taking into account the prandtl losses
-%In process
-BEMPrandtlLosses; %taking into account the prandtl losses 
+% BEM applying Prandtl & Compressibility
+BEMPrandtlLosses; 
 
-%BEM applying tip vortex losses
 % pasar por referencia = https://es.mathworks.com/matlabcentral/answers/96960-does-matlab-pass-parameters-using-call-by-value-or-call-by-reference
 
 %% Printing the plots

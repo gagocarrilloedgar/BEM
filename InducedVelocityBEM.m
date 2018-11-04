@@ -1,7 +1,6 @@
 function [lambda_i,phi] = InducedVelocityBEM(sigma,Cl_alpha,theta,r,N)
 
 %Hipotesis taken in order to simplified the bem equation:
-%Vc = 0 ( Design Condition)
 %Cl(alpha) = Cl_alpha * alpha
 %v_i << omgegaR
 

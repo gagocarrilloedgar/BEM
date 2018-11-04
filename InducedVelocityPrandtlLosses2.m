@@ -1,14 +1,15 @@
-function [lambda_iPr,phi_pr] = InducedVelocityPrandtlLosses2(sigma,theta,r,N,nblades,cl_vec,cd_vec,v_sound,omega,R_propeller)
+function [lambda_iPr,phi_pr] = InducedVelocityPrandtlLosses2(sigma,theta,r,N,nblades,cl_vec,cd_vec,v_sound,omega,R_propeller,v_c)
 
 Cl_f =@(y) ppval(cl_vec,y);
 Cd_f =@(y) ppval(cd_vec,y);
 
 delta =10e-3;
 Mtip = (omega*R_propeller )/ v_sound;
+lambda_c = v_c/(omega*R_propeller);
 
 for i = 1:N
     x0 =[0 0 0];
-    fun = @(x) BEM(r(i),sigma(i),theta(i),Cl_f,Cd_f,x,Mtip);
+    fun = @(x) BEM(r(i),sigma(i),theta(i),Cl_f,Cd_f,x,Mtip,lambda_c);
     sol = fsolve(fun,x0);
     
     lambda_i_k(i) =sol(1);
@@ -54,7 +55,7 @@ end
 lambda_iPr = zeros(N,1);
 for i =2:N-1
     x0 = [0.001 0.001 0.001 0.001 0.001 0.001];
-    fun = @(x) SolverPrandtl(r(i),sigma(i),theta(i),Cl_f,Cd_f,x,F_K_1(i),Mtip);
+    fun = @(x) SolverPrandtl(r(i),sigma(i),theta(i),Cl_f,Cd_f,x,F_K_1(i),Mtip,lambda_c);
     sol=fsolve(fun,x0);
     lambda_iPr(i) = sol(1);
     phi_pr(i) = sol(2);
@@ -62,22 +63,22 @@ end
 
 end
 
-function F = BEM(r,sigma,theta,Cl_f,Cd_f,x,Mtip)
+function F = BEM(r,sigma,theta,Cl_f,Cd_f,x,Mtip,lambda_c)
 lambda_i = x(1);
 phi = x(2);
 alpha = x(3);
 
-F(1) = (8*(lambda_i)^2 * r) - (( (Cl_f(rad2deg(alpha))*cos(phi))/(sqrt(1-(Mtip^2)*(r^2))) -Cd_f(rad2deg(alpha))*sin(phi))*sigma*(r^2 + lambda_i^2));
+F(1) = (8*(lambda_i)*(lambda_c+lambda_i) * r) - (( (Cl_f(rad2deg(alpha))*cos(phi))/(sqrt(1-(Mtip^2)*(r^2))) -Cd_f(rad2deg(alpha))*sin(phi))*sigma*(r^2 + (lambda_i+lambda_c)^2));
 F(2) = phi - atan(lambda_i/r);
 F(3) = alpha- theta + phi;
 end
 
-function F = SolverPrandtl(r,sigma,theta,Cl_f,Cd_f,x,F_K_1,Mtip)
+function F = SolverPrandtl(r,sigma,theta,Cl_f,Cd_f,x,F_K_1,Mtip,lambda_c)
 lambda_i = x(1);
 phi = x(2);
 alpha = x(3);
 
-F(1) = (8*(lambda_i)^2 * r) - (( (Cl_f(rad2deg(alpha))*cos(phi))/(sqrt(1-(Mtip^2)*(r^2))) - Cd_f(rad2deg(alpha))*sin(phi))*sigma*(r^2 + lambda_i^2));
+F(1) = (8*(lambda_i)*(lambda_c+lambda_i) * r) - (( (Cl_f(rad2deg(alpha))*cos(phi))/(sqrt(1-(Mtip^2)*(r^2))) - Cd_f(rad2deg(alpha))*sin(phi))*sigma*(r^2 + (lambda_c+lambda_i)^2));
 F(2) = phi - atan(lambda_i/(r*F_K_1));
 F(3) = alpha- theta + phi;
 end

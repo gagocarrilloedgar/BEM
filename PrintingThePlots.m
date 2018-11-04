@@ -20,7 +20,7 @@ while (confirmation)
         confirmation = 0;
         
         %Lambda for the diferent Methods
-        CreateFigureOFLambdas(lamda_MTH_i,lambdai_BEM,lambdai_BEM_PR,r,N);
+        CreateFigureOFLambdas(lamda_MTH_i,Lambdai_BEMS,Lambdai_PrGl,r,N);
         
     elseif(option == 'B' || option =='b')
         fprintf('That is fine by\n' );

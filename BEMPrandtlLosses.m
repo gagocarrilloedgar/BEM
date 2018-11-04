@@ -4,29 +4,43 @@ format compact;
 
 %Computing the induced velocities
 
-InducedPrGl;
-
-F1=-3;
-i=0;
-option = 2;
-omega = omega_ideal;
-switch(option)
+method = 2;
+switch (method)
     case 1
-        while(F1<0)
-            [F1] =   WdFz(omega,R_propeller,rho,Chord_real,Cl,Cd,N,Weight,N_blades,phi,lambdai_BEM_PR);
-            omega = omega*1.5;
-        end
-    case 2 % Numerical integration in order to find the right 
-        while(F1<0)
-            [F1] =  WdFzNumeric(omega,R_propeller,rho,Chord_real,Cl,Cd,N,Weight,r,N_blades,phi,lambdai_BEM_PR);
-            omega = omega - 50;
-        end
+        %Computing the induced velocities (Simplified )
+        [lambdai_BEM] = InducedVelocityPrandtlLosses(Sigma_real,Cl_alpha,Theta_real,r,N,N_blades,omega_ideal,R_propeller,v_sound);
+    case 2
+        % Computing the induced BEM-Prandtl-Compr velocities (real)
+        % To do de ppval
+        Cl_pchip2=pchip(Alpha,Cl);
+        Cd_pchip2=pchip(Alpha,Cd);
+        [lambdai_BEM,phi] = InducedVelocityPrandtlLosses2(Sigma_real,Theta_real,r,N,N_blades,Cl_pchip2,Cd_pchip2,v_sound,omega_ideal,R_propeller,v_c);
     otherwise
+        fprintf('Not available, sorry');
 end
 
+% Changin de cl for the correct one computed by alpha = theta - atan(lambda_i/r)
+alpha_modified =  rad2deg(Theta_real - atan(lambdai_BEM./r));
+
+%Interpolation between alpha, cl and alpha_modified ( we need to ask aleix
+%if this is needed
+Cl_modified = interp1(Alpha, Cl,alpha_modified);
+Cd_modified = interp1(Alpha, Cd,alpha_modified);
+
+%Now we need the limits for the Bolzano method
+GettingOmegaLimits;
+
+%This defines wether the bolzano method will take lambda_i into account or
+%not
+% 1 --> no
+% 2 --> yes
+BolzanoMethod = 2;
+
 %Computing the bolzano theorem in order to find the right omega
-BolzanoTheorem2;
-Omega_BEM(2,1) = (omega_a + omega_c)/2;
+BolzanoTheorem;
+Omega_BEM = (omega_a + omega_c)/2;
+lambda_c = v_c/(Omega_BEM*R_propeller);
+ComputesPower
 
-err = abs(Omega_BEM(2,1) - Omega_BEM(1,1));
-
+dFz_PrGl = dFz;
+Lambdai_PrGl=lambdai_BEM;
