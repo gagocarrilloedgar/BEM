@@ -27,7 +27,6 @@ Cl_opt;
 ChordAndSolidity;
 
 %% Aplicación de BEM
-% Bem for v_c = 0;
 SimplfiedBEMForW; % Not taking into account the prandtl losses
 % BEM applying Prandtl & Compressibility
 BEMPrandtlLosses; 

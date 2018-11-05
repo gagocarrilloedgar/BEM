@@ -6,6 +6,7 @@ format compact;
 % corrections
 
 method = 2;
+K=N;
 switch (method)
     case 1
         %Computing the induced velocities (Simplified )
@@ -28,6 +29,7 @@ Cl_modified = interp1(Alpha, Cl,alpha_modified);
 Cd_modified = interp1(Alpha, Cd,alpha_modified);
 
 %Now we need the limits for the Bolzano method
+F_comp =ones(N,1);
 GettingOmegaLimits;
 
 %This defines wether the bolzano method will take lambda_i into account or
@@ -35,7 +37,7 @@ GettingOmegaLimits;
 % 1 --> no
 % 2 --> yes
 BolzanoMethod = 1;
-VcValue = 1;
+VcValue = 0;
 
 %Computing the bolzano theorem in order to find the right omega
 BolzanoTheorem;

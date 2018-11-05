@@ -1,4 +1,4 @@
-function [lambda_iPr,phi_pr] = InducedVelocityPrandtlLosses2(sigma,theta,r,N,nblades,cl_vec,cd_vec,v_sound,omega,R_propeller,v_c)
+function [lambda_iPr,phi_pr,F_Comp] = InducedVelocityPrandtlLosses2(sigma,theta,r,N,nblades,cl_vec,cd_vec,v_sound,omega,R_propeller,v_c)
 
 Cl_f =@(y) ppval(cl_vec,y);
 Cd_f =@(y) ppval(cd_vec,y);
@@ -53,12 +53,16 @@ while (phi_err>delta)
 end
 
 lambda_iPr = zeros(N,1);
+F_Comp =zeros(N,1);
 for i =2:N-1
     x0 = [0.001 0.001 0.001 0.001 0.001 0.001];
     fun = @(x) SolverPrandtl(r(i),sigma(i),theta(i),Cl_f,Cd_f,x,F_K_1(i),Mtip,lambda_c);
     sol=fsolve(fun,x0);
     lambda_iPr(i) = sol(1);
     phi_pr(i) = sol(2);
+    F_Comp(i) = (sqrt(1-(Mtip^2)*(r(i)^2)));
+    F_Comp(1,1) =1;
+    F_Comp(67,1) = (sqrt(1-(Mtip^2)*(1^2)));
 end
 
 end
@@ -79,6 +83,6 @@ phi = x(2);
 alpha = x(3);
 
 F(1) = (8*(lambda_i)*(lambda_c+lambda_i) * r) - (( (Cl_f(rad2deg(alpha))*cos(phi))/(sqrt(1-(Mtip^2)*(r^2))) - Cd_f(rad2deg(alpha))*sin(phi))*sigma*(r^2 + (lambda_c+lambda_i)^2));
-F(2) = phi - atan(lambda_i/(r*F_K_1));
+F(2) = phi - atan((lambda_i+lambda_c)/(r*F_K_1));
 F(3) = alpha- theta + phi;
 end

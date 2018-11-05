@@ -18,14 +18,14 @@ while(epsilon_1>epsilon && epsilon_2> epsilon)
     switch(option)
         case 1
             %Computing the needed points
-            [F1_a,dFza] =  WdFz(omega_a,R_propeller,rho,Chord_real,Cl,Cd,N,Weight,N_blades,phi,lambdai_BEM);
-            [F1_b,dFzb] =  WdFz(omega_b,R_propeller,rho,Chord_real,Cl,Cd,N,Weight,N_blades,phi,lambdai_BEM);
-            [F1_c,dFz] =  WdFz(omega_c,R_propeller,rho,Chord_real,Cl,Cd,N,Weight,N_blades,phi,lambdai_BEM);
+            [F1_a,dFza] =  WdFz(omega_a,R_propeller,rho,Chord_real,Cl_modified,Cd_modified,N,Weight,N_blades,phi,lambdai_BEM);
+            [F1_b,dFzb] =  WdFz(omega_b,R_propeller,rho,Chord_real,Cl_modified,Cd_modified,N,Weight,N_blades,phi,lambdai_BEM);
+            [F1_c,dFz] =  WdFz(omega_c,R_propeller,rho,Chord_real,Cl_modified,Cd_modified,N,Weight,N_blades,phi,lambdai_BEM);
         case 2
             %Computing the needed points
-            [F1_a,dFza] =  WdFzNumeric(omega_a,R_propeller,rho,Chord_real,Cl,Cd,N,Weight,r,N_blades,phi,lambdai_BEM,v_c);
-            [F1_b,dFzb] =  WdFzNumeric(omega_b,R_propeller,rho,Chord_real,Cl,Cd,N,Weight,r,N_blades,phi,lambdai_BEM,v_c);
-            [F1_c,dFz] =  WdFzNumeric(omega_c,R_propeller,rho,Chord_real,Cl,Cd,N,Weight,r,N_blades,phi,lambdai_BEM,v_c);
+            [F1_a,dFza] = WdFzNumeric(omega_a,R_propeller,rho,Chord_real,Cl_modified,Cd,N,Weight,r,N_blades,phi,lambdai_BEM,v_c,F_comp,K);
+            [F1_b,dFzb] = WdFzNumeric(omega_b,R_propeller,rho,Chord_real,Cl_modified,Cd,N,Weight,r,N_blades,phi,lambdai_BEM,v_c,F_comp,K);
+            [F1_c,dFz] =  WdFzNumeric(omega_c,R_propeller,rho,Chord_real,Cl_modified,Cd,N,Weight,r,N_blades,phi,lambdai_BEM,v_c,F_comp,K);
         otherwise
             fprintf('Not an option');
             break;
@@ -47,11 +47,11 @@ while(epsilon_1>epsilon && epsilon_2> epsilon)
     end
     
     if(BolzanoMethod == 2)
-        [lambdai_BEM_PR,phi] = InducedVelocityPrandtlLosses2(Sigma_real,Theta_real,r,N,N_blades,Cl_pchip2,Cd_pchip2,v_sound,omega_ideal,R_propeller,v_c);
+        [lambdai_BEM,phi,F_Comp] = InducedVelocityPrandtlLosses2(Sigma_real,Theta_real,r,N,N_blades,Cl_pchip2,Cd_pchip2,v_sound,omega_c,R_propeller,v_c);
     end
     
     if(VcValue == 1)
-        InducedVelocityBEM2(Sigma_real,Theta_real,r,N,Cl_pchip2,Cd_pchip2,v_c,omega_c,R_propeller);
+    [lambdai_BEM,phi] = InducedVelocityBEM2(Sigma_real,Theta_real,r,N,Cl_pchip2,Cd_pchip2,v_c,omega_c,R_propeller);
     end
     
     
