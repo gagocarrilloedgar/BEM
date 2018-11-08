@@ -29,6 +29,7 @@ ChordAndSolidity;
 %% Aplicación de BEM
 SimplfiedBEMForW; % Not taking into account the prandtl losses
 % BEM applying Prandtl & Compressibility
+
 BEMPrandtlLosses; 
 
 % pasar por referencia = https://es.mathworks.com/matlabcentral/answers/96960-does-matlab-pass-parameters-using-call-by-value-or-call-by-reference
