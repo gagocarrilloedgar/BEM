@@ -15,6 +15,7 @@ while(epsilon_1>epsilon && epsilon_2> epsilon)
     i=i+1;
     %Mid point
     omega_c = (omega_a + omega_b) / 2; % % omega average
+
     switch(option)
         case 1
             %Computing the needed points
@@ -48,10 +49,18 @@ while(epsilon_1>epsilon && epsilon_2> epsilon)
     
     if(BolzanoMethod == 2)
         [lambdai_BEM,phi,F_Comp] = InducedVelocityPrandtlLosses2(Sigma_real,Theta_real,r,N,N_blades,Cl_pchip2,Cd_pchip2,v_sound,omega_c,R_propeller,v_c);
+
+        if((omega_c * R_propeller)/v_sound <= 0.8)
+            alpha_modified =  rad2deg(Theta_real - atan(phi'));
+            Cl_modified = interp1(Alpha,Cl,alpha_modified);
+            Cl_modified =Cl_modified./F_Comp;
+            Cd_modified = interp1(Alpha, Cd,alpha_modified);
+            Cl_modified_Pr = Cl_modified;
+        end
     end
     
     if(VcValue == 1)
-    [lambdai_BEM,phi] = InducedVelocityBEM2(Sigma_real,Theta_real,r,N,Cl_pchip2,Cd_pchip2,v_c,omega_c,R_propeller);
+        [lambdai_BEM,phi] = InducedVelocityBEM2(Sigma_real,Theta_real,r,N,Cl_pchip2,Cd_pchip2,v_c,omega_c,R_propeller);
     end
     
     

@@ -61,7 +61,7 @@ for i =2:N-1
     lambda_iPr(i) = sol(1);
     phi_pr(i) = sol(2);
     F_Comp(i) = (sqrt(1-(Mtip^2)*(r(i)^2)));
-    F_Comp(1,1) =1;
+    F_Comp(1,1) = 1;
     F_Comp(67,1) = (sqrt(1-(Mtip^2)*(1^2)));
 end
 

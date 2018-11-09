@@ -20,7 +20,23 @@ while (confirmation)
         confirmation = 0;
         
         %Lambda for the diferent Methods
-        CreateFigureOFLambdas(lamda_MTH_i,Lambdai_BEMS,Lambdai_PrGl,r,N);
+        CreateFigureOFLambdas(Lambda_vector_MTH,lambda_vector_BEM,lambda_vector_Pr,r,N);
+        
+        %Power Figures
+        CreateFiguresOfPowerMTH(dPt_dx_MTH(:,1),dPt_dx_MTH(:,2),dPt_dx_MTH(:,3),dPt_dx_MTH(:,4),r);
+        CreateFiguresOfPowerBEM(dPt_dx_BEM(:,1),dPt_dx_BEM(:,2),dPt_dx_BEM(:,3),dPt_dx_BEM(:,4),r);
+        CreateFiguresOfPowerPr(dPt_dx_Pr(:,1),dPt_dx_Pr(:,2),dPt_dx_Pr(:,3),dPt_dx_Pr(:,4),r);
+        CreateFiguresOfPower(dPt_dx_MTH,dPt_dx_BEM,dPt_dx_Pr,r);
+        
+        %Cl(r)
+        CreateFiguresOfCl(Cl_vector_MTH,Cl_vector_BEM,Cl_vector_Pr,r);
+
+        %Fz_dx
+        CreateFiguresOfFzMTH(dFz_dx_MTH(:,1),dFz_dx_MTH(:,2),dFz_dx_MTH(:,3),dFz_dx_MTH(:,4),r);
+        CreateFiguresOfFzBEM(dFz_dx_BEM(:,1),dFz_dx_BEM(:,2),dFz_dx_BEM(:,3),dFz_dx_BEM(:,4),r);
+        CreateFiguresOfFzPr(dFz_dx_Pr(:,1),dFz_dx_Pr(:,2),dFz_dx_Pr(:,3),dFz_dx_Pr(:,4),r);
+
+
         
     elseif(option == 'B' || option =='b')
         fprintf('That is fine by\n' );

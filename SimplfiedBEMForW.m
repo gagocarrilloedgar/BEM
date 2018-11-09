@@ -22,11 +22,12 @@ switch (method)
 end
 
 % Changin de cl for the correct one computed by alpha = theta - atan(lambda_i/r)
-alpha_modified =  rad2deg(Theta_real - atan((lambdai_BEM + v_c/(omega_ideal*R_propeller))./r));
+alpha_modified =  rad2deg(Theta_real - atan(phi'));
 
 %Interpolation between alpha, cl and alpha_modified
 Cl_modified = interp1(Alpha, Cl,alpha_modified);
 Cd_modified = interp1(Alpha, Cd,alpha_modified);
+Cl_modified_Simpl = Cl_modified;
 
 %Now we need the limits for the Bolzano method
 F_comp =ones(N,1);
@@ -41,9 +42,17 @@ VcValue = 0;
 
 %Computing the bolzano theorem in order to find the right omega
 BolzanoTheorem;
+
 Omega_BEM = (omega_a + omega_c)/2;
 lambda_c = v_c/(Omega_BEM*R_propeller);
-ComputesPower; 
 
-dFz_Simplified = dFz;
-Lambdai_BEMS = lambdai_BEM;
+%Computing the power needed
+ComputesPower; 
+dPt_Deltax_Sim = dPt_Deltax;
+dPi_Deltax_Sim = dPi_Deltax;
+
+dPt_dx_BEM(1:end-1,index) = dPp_Deltax;
+Cl_vector_BEM = Cl_modified;
+dFz_dx_BEM(:,index) = -dFz;
+
+lambda_vector_BEM(:,index) = lambdai_BEM;

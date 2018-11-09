@@ -9,7 +9,20 @@ N_blades = 2;
 PL = 7.5 ; %kg
 M_tip = 0.5;
 Weight=EW + PL;
-v_c = 4;
+
+if(index == 1)
+    v_c = 0;
+end
+if(index == 2)
+    v_c = 2.5;
+end
+if(index == 3)
+    v_c = 5;
+end
+if(index == 4)
+    v_c = 7.5;
+end
+
 
 
 %Applying ISA and flight design conditions

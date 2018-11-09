@@ -38,7 +38,9 @@ SimplfiedBEMForW;
 % BEM applying Prandtl & Compressibility
 BEMPrandtlLosses; 
 
+% pasar por referencia = https://es.mathworks.com/matlabcentral/answers/96960-does-matlab-pass-parameters-using-call-by-value-or-call-by-reference
+
 end
 %% Printing the plots
 PrintingThePlots;
-
+CreateFiguresOfPower(dPt_dx_MTH(1:end,1),dPt_dx_MTH(1:end,1),dPt_dx_MTH(1:end,1)dPt_dx_MTH(1:end,1),r)
