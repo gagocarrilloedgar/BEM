@@ -8,7 +8,7 @@ h_al = 300; % m ( altura de vol de disseny)
 N_blades = 2;
 PL = 7.5 ; %kg
 M_tip = 0.5;
-Weight=EW + PL;
+Weight=EW + PL/2;
 
 if(index == 1)
     v_c = 0;
@@ -54,3 +54,5 @@ else
 vi_MTH = (-v_c+ sqrt( v_c^2 + (4*(EW +PL)*g)/(2*rho*A)))/2;
 end
 lamda_MTH_i= vi_MTH/(omega_ideal*R_propeller);
+
+Omega_vector(1,index) = omega_ideal;

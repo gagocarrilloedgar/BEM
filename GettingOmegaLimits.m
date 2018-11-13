@@ -1,7 +1,7 @@
 %We will start calculation  with omega_ideal
 %Finding the omega limits in order to be aable to apply the bolzano theorem
 omega = omega_ideal;
-F1=3;
+F1=-3;
 i=0;
 option = 2;
 switch(option)
@@ -12,9 +12,9 @@ switch(option)
         end
     case 2 % Numerical integration in order to find the right 
 
-        while(F1>0)
+        while(F1<0)
             [F1,dFza] =  WdFzNumeric(omega,R_propeller,rho,Chord_real,Cl_modified,Cd_modified,N,Weight,r,N_blades,phi,lambdai_BEM,v_c,F_comp,K);
-            omega = omega + 100;
+            omega = omega - 100;
         end
     otherwise
 end

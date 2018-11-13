@@ -17,7 +17,6 @@ while (confirmation)
         
         %Pots of Theta and Sigma
         CreateFiguresOfThetaAndSigma(Theta_ideal_r,Sigma_ideal_r,Theta_real,Sigma_real,r);
-        confirmation = 0;
         
         %Lambda for the diferent Methods
         CreateFigureOFLambdas(Lambda_vector_MTH,lambda_vector_BEM,lambda_vector_Pr,r,N);
@@ -35,7 +34,11 @@ while (confirmation)
         CreateFiguresOfFzMTH(dFz_dx_MTH(:,1),dFz_dx_MTH(:,2),dFz_dx_MTH(:,3),dFz_dx_MTH(:,4),r);
         CreateFiguresOfFzBEM(dFz_dx_BEM(:,1),dFz_dx_BEM(:,2),dFz_dx_BEM(:,3),dFz_dx_BEM(:,4),r);
         CreateFiguresOfFzPr(dFz_dx_Pr(:,1),dFz_dx_Pr(:,2),dFz_dx_Pr(:,3),dFz_dx_Pr(:,4),r);
-
+        
+        %Cuerda
+        CreateFigureOfChord(Chord_real,r);
+        
+        confirmation = 0;
 
         
     elseif(option == 'B' || option =='b')

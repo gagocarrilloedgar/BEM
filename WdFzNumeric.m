@@ -8,11 +8,11 @@ Fz = 0;
 lambda_c = v_c /(omega*R_propeller);
 dFz = zeros(N,1);
 for i=1:K
-    Int = (k*C(i)*((r(i)^2 +(lambda_i(i)+lambda_c)^2))*(((Cl_modified(i)/(F_comp(i)))*r(i)*cos(phi(i))) - ((Cd_modified(i)*sin(phi(i)))))*DeltaR);
+    Int = (k*C(i)*(((r(i)^2 +(lambda_i(i)+lambda_c)^2))*(((Cl_modified(i)/(F_comp(i)))*r(i)*cos(phi(i))) - ((Cd_modified(i)*sin(phi(i)))))*DeltaR));
     Fz= Fz + Int;
     dFz(i,1) = Fz;
 end
 
-F1= Weight*9.819 + Fz ;
+F1= Weight*9.819/4 + Fz ;
 
 end

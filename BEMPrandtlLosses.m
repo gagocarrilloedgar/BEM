@@ -37,12 +37,15 @@ GettingOmegaLimits;
 % 1 --> no
 % 2 --> yes
 omega_ideal = omega_ideal+100;
+
 BolzanoMethod = 2;
 VcValue = 0;
+
 %Computing the bolzano theorem in order to find the right omega
 BolzanoTheorem;
-Omega_BEM = (omega_a + omega_c)/2;
-lambda_c = v_c/(Omega_BEM*R_propeller);
+Omega_BEMPr = (omega_a + omega_c)/2;
+Omega_vector(3,index) = Omega_BEMPr;
+lambda_c = v_c/(Omega_BEMPr*R_propeller);
 
 %Computing the power needed
 ComputesPower; 

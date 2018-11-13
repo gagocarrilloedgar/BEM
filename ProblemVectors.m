@@ -4,6 +4,7 @@
 % 2,1 --> v_c =2.5
 % 3,1 --> v_c =5
 % 4,1 --> v_c =7.5
+Omega_vector=zeros(3,4);
 
 Cl_vector_MTH = zeros(N,4);
 Cl_vector_BEM = zeros(N,4);

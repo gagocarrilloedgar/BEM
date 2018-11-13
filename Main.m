@@ -28,7 +28,9 @@ DesignConditions;
 Cl_opt;
 
 %% Lleis de corda (theta) i solidesa (sigma)
+
 ChordAndSolidity;
+
 
 %% MTH
 MTH;

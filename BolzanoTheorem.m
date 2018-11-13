@@ -39,24 +39,30 @@ while(epsilon_1>epsilon && epsilon_2> epsilon)
     if(F1_a * F1_b < 0)
         if(F1_a * F1_c >0)
             omega_a = omega_c;
-        else
+        elseif(F1_b*F1_c>0)
             omega_b = omega_c;
         end
     end
-    if(F1_a * F1_b > 0)
-        omega_b = 1.5*omega_b;
+    if(F1_a * F1_b >0)
+        omega_b = omega_b - 100;
+        omega_a = omega_a + 100;
     end
     
     if(BolzanoMethod == 2)
         [lambdai_BEM,phi,F_Comp] = InducedVelocityPrandtlLosses2(Sigma_real,Theta_real,r,N,N_blades,Cl_pchip2,Cd_pchip2,v_sound,omega_c,R_propeller,v_c);
 
         if((omega_c * R_propeller)/v_sound <= 0.8)
+            [lambdai_BEM,phi,F_Comp] = InducedVelocityPrandtlLosses2(Sigma_real,Theta_real,r,N,N_blades,Cl_pchip2,Cd_pchip2,v_sound,omega_c,R_propeller,v_c);
             alpha_modified =  rad2deg(Theta_real - atan(phi'));
             Cl_modified = interp1(Alpha,Cl,alpha_modified);
             Cl_modified =Cl_modified./F_Comp;
             Cd_modified = interp1(Alpha, Cd,alpha_modified);
             Cl_modified_Pr = Cl_modified;
+        else
+                break;
         end
+    
+        
     end
     
     if(VcValue == 1)
