@@ -20,7 +20,7 @@ ProblemVectors;
 %Polynomial interpolation
 CreatePchipVectors;
 
-for index = 1:4
+for index = 4:4
 %Design and problem conditions
 DesignConditions;
 
@@ -43,4 +43,5 @@ BEMPrandtlLosses;
 end
 %% Printing the plots
 PrintingThePlots;
+
 

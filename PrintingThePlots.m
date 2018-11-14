@@ -51,3 +51,10 @@ while (confirmation)
     end
     
 end
+
+fprintf(P_tot_MTH );
+fprintf('\n');
+fprintf(P_tot_BEM );
+fprintf('\n');
+fprintf(P_tot_PC );
+fprintf('\n');

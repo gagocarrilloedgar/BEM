@@ -44,8 +44,7 @@ while(epsilon_1>epsilon && epsilon_2> epsilon)
         end
     end
     if(F1_a * F1_b >0)
-        omega_b = omega_b - 100;
-        omega_a = omega_a + 100;
+        omega_b = omega_b + 100;
     end
     
     if(BolzanoMethod == 2)
