@@ -20,7 +20,7 @@ ProblemVectors;
 %Polynomial interpolation
 CreatePchipVectors;
 
-for index = 4:4
+for index = 1:4
 %Design and problem conditions
 DesignConditions;
 

@@ -56,9 +56,9 @@ lambda_c = v_c/(Omega_BEM*R_propeller);
 ComputesPower; 
 dPt_Deltax_Sim = dPt_Deltax;
 dPi_Deltax_Sim = dPi_Deltax;
-
 dPt_dx_BEM(1:end-1,index) = dPp_Deltax;
 Cl_vector_BEM = Cl_modified;
 dFz_dx_BEM(:,index) = -dFz;
+P_tot_BEM(1,index) = Pt;
 
 lambda_vector_BEM(:,index) = lambdai_BEM;

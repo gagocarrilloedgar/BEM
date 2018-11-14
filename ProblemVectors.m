@@ -5,6 +5,9 @@
 % 3,1 --> v_c =5
 % 4,1 --> v_c =7.5
 Omega_vector=zeros(3,4);
+P_tot_MTH=zeros(3,4);
+P_tot_BEM=zeros(3,4);
+P_tot_Pr=zeros(3,4);
 
 Cl_vector_MTH = zeros(N,4);
 Cl_vector_BEM = zeros(N,4);
@@ -31,5 +34,7 @@ dFx_dx_Pr = zeros(N,4);
 dPi_dx_Pr = zeros(N,4);
 dPp_dx_Pr = zeros(N,4);
 dPt_dx_Pr = zeros(N,4);
+
+
 
 

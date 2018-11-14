@@ -19,6 +19,8 @@ dPi_dx_MTH(:,index) = k.*((lambda_c + lamda_MTH_i)^2 + r.^2).*sin(phi).*Chord_re
 dPp_dx_MTH(:,index) = k.*((lambda_c + lamda_MTH_i)^2 + r.^2).*cos(phi).*Chord_real.*Cd_modified;
 dPt_dx_MTH(:,index) = dPi_dx_MTH(:,index) + dPp_dx_MTH(:,index);
 
+P_tot_MTH(1,index) = 
+
 %dFz
 dFz_dx_MTH(:,index) = (k_z.*Chord_real.*((r.^2 +(lamda_MTH_i+lambda_c)^2)).*((Clopt.*r.*cos(phi))));
 

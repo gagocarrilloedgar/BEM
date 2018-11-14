@@ -1,6 +1,6 @@
 
 % Now we need to compute the power in order to size the batery
-k= rho*0.5*(Omega_BEM*R_propeller)^3 * R_propeller;
+k= rho*0.5*(Omega_BEM*R_propeller)^3 * R_propeller*N_blades;
 dr = R_propeller/N;
 Pi =0;
 Pp =0;

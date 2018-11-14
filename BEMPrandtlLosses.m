@@ -56,5 +56,6 @@ dPi_Deltax_Pr = dPi_Deltax;
 dPt_dx_Pr(1:end-1,index) = dPp_Deltax;
 Cl_vector_Pr = Cl_modified;
 dFz_dx_Pr(:,index) = -dFz;
+P_tot_Pr(1,index) = Pt;
 
 lambda_vector_Pr(:,index)=lambdai_BEM;

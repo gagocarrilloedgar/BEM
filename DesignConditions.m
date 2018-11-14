@@ -6,9 +6,9 @@ A= pi*R_propeller^2;
 h = 2; %km (altitud de vol de disseny)
 h_al = 300; % m ( altura de vol de disseny)
 N_blades = 2;
-PL = 10 ; %kg
+PL = 7.5 ; %kg
 M_tip = 0.5;
-Weight=EW + PL;
+Weight=EW + PL/2;
 
 if(index == 1)
     v_c = 0;
