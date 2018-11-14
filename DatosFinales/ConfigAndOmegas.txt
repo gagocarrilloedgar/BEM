@@ -1,0 +1,30 @@
+Configuración de los calculos
+
+--------------------Configuración--------------
+EW = 5 kg;
+PL = 7.5 kg;
+R = 0.35 m;
+Airfoil = NACA 23015;
+Rotors = 4;
+Palas = 2;
+
+------------------ Para dimensionado de baterias ---------------
+EW = 5 kg;
+PL = 14 kg;
+VC = 7.5 m/s
+R = 0.35 m;
+Airfoil = NACA 23015;
+Rotors = 4;
+Palas = 2;
+
+P_tot = 1.35KW/rotor
+omega = 725 rad/s
+Método = Prandtl de punta de ala y encastre más compresible;
+
+
+--------------------Omega (rad/s)-------------------
+
+vc	     0 	   	   2.5 		 5 	     7.5
+MACH 0.5   4.7500e+02   4.7500e+02   4.7500e+02   4.7500e+02
+BEM        2.8523e+02   3.2881e+02   3.7824e+02   4.3309e+02
+PR+COMP    3.6380e+02   4.2671e+02   5.0969e+02   5.8101e+02

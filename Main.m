@@ -37,7 +37,7 @@ MTH;
 
 %% BEM
 SimplfiedBEMForW; 
-% BEM applying Prandtl & Compressibility
+% % BEM applying Prandtl & Compressibility
 BEMPrandtlLosses; 
 
 end

@@ -27,8 +27,8 @@ alpha_modified =  rad2deg(Theta_real - atan(phi'));
 %Interpolation between alpha, cl and alpha_modified
 Cl_modified = interp1(Alpha, Cl,alpha_modified);
 Cd_modified = interp1(Alpha, Cd,alpha_modified);
-Cl_modified_Simpl = Cl_modified;
-
+Cl_modified_BEM = Cl_modified;
+Cd_modified_BEM= Cd_modified;
 %Now we need the limits for the Bolzano method
 F_comp =ones(N,1);
 GettingOmegaLimits;
@@ -53,12 +53,22 @@ Omega_vector(2,index) = Omega_BEM;
 lambda_c = v_c/(Omega_BEM*R_propeller);
 
 %Computing the power needed
+Cl_vector_BEM(:,index) = Cl_modified_BEM;
+Cd_vector_BEM(:,index) = Cd_modified_BEM;
+
 ComputesPower; 
-dPt_Deltax_Sim = dPt_Deltax;
-dPi_Deltax_Sim = dPi_Deltax;
-dPt_dx_BEM(1:end-1,index) = dPp_Deltax;
-Cl_vector_BEM = Cl_modified;
+dPt_Deltax_BEM = dPt_Deltax;
+dPi_Deltax_BEM = dPi_Deltax;
+dPp_Deltax_BEM = dPp_Deltax;
+
+dPt_dx_BEM(1:end-1,index) = dPt_Deltax;
+dPi_dx_BEM(1:end-1,index) = dPi_Deltax;
+dPp_dx_BEM(1:end-1,index) = dPp_Deltax;
+
 dFz_dx_BEM(:,index) = -dFz;
 P_tot_BEM(1,index) = Pt;
+Pi_BEM(1,index) = Pi;
+Pp_BEM(1,index) = Pp;
+
 
 lambda_vector_BEM(:,index) = lambdai_BEM;

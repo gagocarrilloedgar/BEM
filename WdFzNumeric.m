@@ -13,6 +13,6 @@ for i=1:K
     dFz(i,1) = Fz;
 end
 
-F1= Weight*9.819/4 + Fz ;
+F1= 3.2*9.819 + Fz ;
 
 end

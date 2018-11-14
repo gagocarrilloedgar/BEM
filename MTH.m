@@ -2,7 +2,7 @@
 Lambda_vector_MTH(:,index) = lamda_MTH_i*ones(N,1);
 
 %Power
-k= rho*0.5*(omega_ideal*R_propeller)^3 * R_propeller;
+k= rho*0.5*(omega_ideal*R_propeller)^3 * R_propeller*N_blades;
 k_z = (0.5*rho*N_blades*(omega_ideal*R_propeller)^2);
 lambda_c = v_c /(omega_ideal*R_propeller);
 phi=atan((lambda_c + lamda_MTH_i)./r);
@@ -19,8 +19,8 @@ dPi_dx_MTH(:,index) = k.*((lambda_c + lamda_MTH_i)^2 + r.^2).*sin(phi).*Chord_re
 dPp_dx_MTH(:,index) = k.*((lambda_c + lamda_MTH_i)^2 + r.^2).*cos(phi).*Chord_real.*Cd_modified;
 dPt_dx_MTH(:,index) = dPi_dx_MTH(:,index) + dPp_dx_MTH(:,index);
 
-P_tot_MTH(1,index) = 
+dx=R_propeller/N;
+P_tot_MTH(1,index) = sum(dPt_dx_MTH(:,index)*dx);
 
 %dFz
 dFz_dx_MTH(:,index) = (k_z.*Chord_real.*((r.^2 +(lamda_MTH_i+lambda_c)^2)).*((Clopt.*r.*cos(phi))));
-

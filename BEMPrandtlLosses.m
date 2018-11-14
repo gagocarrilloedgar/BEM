@@ -29,33 +29,41 @@ Cl_modified = interp1(Alpha,Cl,alpha_modified);
 Cl_modified =Cl_modified./F_Comp;
 Cd_modified = interp1(Alpha, Cd,alpha_modified);
 Cl_modified_Pr = Cl_modified;
+Cd_modified_Pr = Cd_modified;
+
 %Now we need the limits for the Bolzano method
-GettingOmegaLimits;
+
+GettingOmegaLimits2;
 
 %This defines wether the bolzano method will take lambda_i into account or
 %not
 % 1 --> no
 % 2 --> yes
-omega_ideal = omega_ideal+100;
 
 BolzanoMethod = 2;
 VcValue = 0;
 
-%Computing the bolzano theorem in order to find the right omega
+%Computing the bolzano theorem in order to find the right omegas
 BolzanoTheorem;
-Omega_BEMPr = (omega_a + omega_c)/2;
+Omega_BEMPr= (omega_a + omega_c)/2;
 Omega_vector(3,index) = Omega_BEMPr;
 lambda_c = v_c/(Omega_BEMPr*R_propeller);
 
 %Computing the power needed
-ComputesPower; 
+ComputesPower2; 
 dPt_Deltax_Pr = dPt_Deltax;
 dPi_Deltax_Pr = dPi_Deltax;
+dPp_Deltax_Pr = dPp_Deltax;
 
 %Preparing vectors for the plots
-dPt_dx_Pr(1:end-1,index) = dPp_Deltax;
+dPt_dx_Pr(1:end-1,index) = dPt_Deltax;
+dPt_dx_Pr(1:end-1,index) = dPt_Deltax;
+dPt_dx_Pr(1:end-1,index) = dPt_Deltax;
+
 Cl_vector_Pr = Cl_modified;
 dFz_dx_Pr(:,index) = -dFz;
 P_tot_Pr(1,index) = Pt;
+P_i_Pr(1,index) = Pi;
+P_p_Pr(1,index) = Pp;
 
 lambda_vector_Pr(:,index)=lambdai_BEM;
