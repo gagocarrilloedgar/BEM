@@ -6,14 +6,21 @@ dx = R_propeller/N;
 PMTH=zeros(1,4);
 v_c=[0 2.5 5 7.5];
 lambda_c = v_c./(Omega_vector(2,:)*R_propeller);
+vi_MTH = (-v_c+ sqrt( v_c.^2 + (4.*(EW + PL)*g)/(2*rho*A)))/2;
+lamda_MTH_i= vi_MTH./((Omega_vector(2,:)*R_propeller));
+Lambda_vector_MTH = lamda_MTH_i.*ones(N,1);
+
 for i=1:N
     for j=1:4
     P_MTH(i,j) =  4*pi*r(i)*(Omega_vector(2,j)*R_propeller)^3*R_propeller^2*lambda_vector_BEM(i,j)*((lambda_c(j)+lambda_vector_BEM(i,j))^2)*dx;
     PMTH(1,j) = PMTH(1,j) + P_MTH(i,j);
+    dFzMTH(i,j) = 2*pi*rho*r(i)*(Omega_vector(2,j)*R_propeller)^2*R_propeller^2*lambda_vector_BEM(i,j)*((lambda_c(j)+lambda_vector_BEM(i,j)))*dx;
     end
 end
 
+dFz_dx_MTH =dFzMTH/dx;
 dPt_dx_MTH = P_MTH/dx;
+
 
 while (confirmation)
     option = input('Do you want to print the plots? \n A) Yes \n B) No \n','s');
@@ -32,20 +39,20 @@ while (confirmation)
 %         CreateFiguresOfThetaAndSigma(Theta_ideal_r,Sigma_ideal_r,Theta_real,Sigma_real,r);
 %         
 %         %Lambda for the diferent Methods
-%         CreateFigureOFLambdas(Lambda_vector_MTH,lambda_vector_BEM,lambda_vector_Pr,r,N);
+         CreateFigureOFLambdas(Lambda_vector_MTH,lambda_vector_BEM,lambda_vector_Pr,r,N);
         
         %Power Figures
 %         CreateFiguresOfPowerMTH(dPt_dx_MTH(:,1),dPt_dx_MTH(:,2),dPt_dx_MTH(:,3),dPt_dx_MTH(:,4),r);
 %         CreateFiguresOfPowerBEM(dPt_dx_BEM(:,1),dPt_dx_BEM(:,2),dPt_dx_BEM(:,3),dPt_dx_BEM(:,4),r);
 %         CreateFiguresOfPowerPr(dPt_dx_Pr(:,1),dPt_dx_Pr(:,2),dPt_dx_Pr(:,3),dPt_dx_Pr(:,4),r);
-        CreateFiguresOfPower(dPt_dx_MTH,dPt_dx_BEM,dPt_dx_Pr,r);
+        %CreateFiguresOfPower(dPt_dx_MTH,dPt_dx_BEM,dPt_dx_Pr,r);
         
         %Cl(r)
-        Cl_vector_MTH = Clopt*ones(N,1);
-        CreateFiguresOfCl(Cl_vector_MTH,Cl_vector_BEM,Cl_vector_Pr,r);
+%         Cl_vector_MTH = Clopt*ones(N,1);
+%         CreateFiguresOfCl(Cl_vector_MTH,Cl_vector_BEM,Cl_vector_Pr,r);
 
         %Fz_dx
-%         CreateFiguresOfFzMTH(dFz_dx_MTH(:,1),dFz_dx_MTH(:,2),dFz_dx_MTH(:,3),dFz_dx_MTH(:,4),r);
+         %CreateFiguresOfFzMTH(dFz_dx_MTH(:,1),dFz_dx_MTH(:,2),dFz_dx_MTH(:,3),dFz_dx_MTH(:,4),r);
 %         CreateFiguresOfFzBEM(dFz_dx_BEM(:,1),dFz_dx_BEM(:,2),dFz_dx_BEM(:,3),dFz_dx_BEM(:,4),r);
 %         CreateFiguresOfFzPr(dFz_dx_Pr(:,1),dFz_dx_Pr(:,2),dFz_dx_Pr(:,3),dFz_dx_Pr(:,4),r);
         

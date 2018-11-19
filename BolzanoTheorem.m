@@ -44,7 +44,8 @@ while(epsilon_1>epsilon && epsilon_2> epsilon)
             [lambdai_BEM,phi,F_Comp] = InducedVelocityPrandtlLosses2(Sigma_real,Theta_real,r,N,N_blades,Cl_pchip2,Cd_pchip2,v_sound,omega_c,R_propeller,v_c);
             alpha_modified =  rad2deg(Theta_real - atan(phi'));
             Cl_modified = interp1(Alpha,Cl,alpha_modified);
-            Cl_modified =Cl_modified./F_Comp;
+            Ma=((omega_c*R_propeller)/v_sound);
+            Cl_modified =Cl_modified./(sqrt(1-(Ma^2).*(r.^2)));
             Cd_modified= interp1(Alpha, Cd,alpha_modified);
             Cl_modified_Pr = Cl_modified;
             Cd_modified_Pr = Cd_modified;
