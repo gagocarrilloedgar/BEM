@@ -7,7 +7,7 @@ format compact;
 method = 2;
 K=N-1;
 switch (method)
-    case 1
+    case -4
         %Computing the induced velocities (Simplified )
         [lambdai_BEM] = InducedVelocityPrandtlLosses(Sigma_real,Cl_alpha,Theta_real,r,N,N_blades,omega_ideal,R_propeller,v_sound);
     case 2
